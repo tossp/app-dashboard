@@ -1,0 +1,251 @@
+<div nz-row [nzGutter]="24" class="pt-lg">
+  <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12">
+    <div nz-row>
+      <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+        <g2-timeline
+          [data]="trafficData"
+          [titleMap]="trafficTitle"
+          [height]="200"
+          [slider]="false"
+          [mask]="'HH:mm:ss'"
+        ></g2-timeline>
+      </div>
+    </div>
+  </div>
+  <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12">
+    <g2-card
+      [title]="('app.clash.远程配置' | translate) + ec.host + ':' + ec.port"
+      [action]="configAction"
+      [footer]="configFooter"
+    >
+      <ng-template #configAction>
+        <nz-tooltip [nzTitle]="ec.host + ':' + ec.port">
+          <i nz-tooltip nz-icon nzType="info-circle"></i>
+        </nz-tooltip>
+      </ng-template>
+      <ng-template #configFooter>
+        <div class="mb0">
+          <form nz-form #f="ngForm" [formGroup]="configForm" (ngSubmit)="submitForm()">
+            <div nz-row [nzGutter]="24">
+              <div nz-col [nzSpan]="12">
+                <nz-form-item nzFlex>
+                  <nz-input-group nzCompact [nzAddOnBefore]="'app.clash.HTTP 端口' | translate" [nzSize]="'small'">
+                    <input
+                      type="number"
+                      nz-input
+                      formControlName="port"
+                      [min]="1"
+                      [max]="65535"
+                      [step]="1"
+                      placeholder="placeholder"
+                    />
+                  </nz-input-group>
+                </nz-form-item>
+              </div>
+              <div nz-col [nzSpan]="12">
+                <nz-form-item nzFlex>
+                  <nz-input-group nzCompact [nzAddOnBefore]="'app.clash.Socks5 端口' | translate" [nzSize]="'small'">
+                    <input
+                      type="number"
+                      nz-input
+                      formControlName="socks-port"
+                      [min]="1"
+                      [max]="65535"
+                      [step]="1"
+                      placeholder="placeholder"
+                    />
+                  </nz-input-group>
+                </nz-form-item>
+              </div>
+              <div nz-col [nzSpan]="12">
+                <nz-form-item nzFlex>
+                  <nz-input-group nzCompact [nzAddOnBefore]="'app.clash.redir 端口' | translate" [nzSize]="'small'">
+                    <input
+                      type="number"
+                      nz-input
+                      formControlName="redir-port"
+                      [min]="1"
+                      [max]="65535"
+                      [step]="1"
+                      placeholder="placeholder"
+                    />
+                  </nz-input-group>
+                </nz-form-item>
+              </div>
+
+              <div nz-col [nzSpan]="12">
+                <nz-form-item nzFlex>
+                  <nz-input-group nzCompact [nzAddOnBefore]="'app.clash.代理模式' | translate" [nzSize]="'small'">
+                    <nz-radio-group
+                      [nzSize]="'small'"
+                      formControlName="mode"
+                      (ngModelChange)="handleConfigChange($event, 'mode')"
+                    >
+                      <label nz-radio-button nzValue="Global"><span>全局</span></label>
+                      <label nz-radio-button nzValue="Rule"><span>规则</span></label>
+                      <label nz-radio-button nzValue="Direct"><span>直连</span></label>
+                    </nz-radio-group>
+                  </nz-input-group>
+                </nz-form-item>
+              </div>
+              <div nz-col [nzSpan]="6">
+                <nz-form-item nzFlex>
+                  <nz-input-group nzCompact [nzAddOnBefore]="'app.clash.允许局域网' | translate" [nzSize]="'small'">
+                    <nz-switch
+                      nzSize="small"
+                      [nzCheckedChildren]="checkedTemplate"
+                      [nzUnCheckedChildren]="unCheckedTemplate"
+                      formControlName="allow-lan"
+                    ></nz-switch>
+                  </nz-input-group>
+                </nz-form-item>
+              </div>
+              <div nz-col [nzSpan]="12">
+                <nz-form-item nzFlex>
+                  <nz-input-group nzCompact [nzAddOnBefore]="'app.clash.日志等级' | translate" [nzSize]="'small'">
+                    <nz-radio-group [nzSize]="'small'" formControlName="log-level">
+                      <label nz-radio-button nzValue="debug"><span>调试</span></label>
+                      <label nz-radio-button nzValue="info"><span>信息</span></label>
+                      <label nz-radio-button nzValue="warning"><span>警告</span></label>
+                      <label nz-radio-button nzValue="error"><span>错误</span></label>
+                    </nz-radio-group>
+                  </nz-input-group>
+                </nz-form-item>
+              </div>
+              <div nz-col [nzSpan]="6">
+                <nz-form-item nzFlex>
+                  <nz-input-group nzCompact [nzSize]="'small'">
+                    <button nz-button [nzSize]="'small'" (click)="editEc()" nzType="primary">远程配置</button>
+                    <button nz-button (click)="restart()" [nzSize]="'small'">刷新</button>
+                  </nz-input-group>
+                </nz-form-item>
+              </div>
+              <ng-template #checkedTemplate><i nz-icon nzType="check"></i></ng-template>
+              <ng-template #unCheckedTemplate><i nz-icon nzType="close"></i></ng-template>
+            </div>
+          </form>
+        </div>
+      </ng-template>
+    </g2-card>
+  </div>
+</div>
+<nz-card [nzBordered]="false" class="ant-card__body-nopadding sales-card">
+  <nz-tabset [nzTabBarExtraContent]="extraTemplate">
+    <nz-tab nzTitle="策略组">
+      <div nz-row style="padding: 6px;">
+        <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+          <form #f="ngForm" nz-form se-container="1" size="compact" [line]="true" gutter="32" [labelWidth]="null">
+            <ng-template ngFor let-item [ngForOf]="groupProxy | keys" [ngForTrackBy]="proxiestrackByFn">
+              <se
+                [label]="item.key"
+                [optional]="item.value.type"
+                [extra]="'extra'"
+                [labelWidth]="240"
+                *ngIf="item.value.all"
+              >
+                <tag-select [expandable]="false" [class.tag-select__expanded]="true">
+                  <nz-tag
+                    *ngFor="let i of item.value.all"
+                    [nzMode]="item.value.type != 'Selector' ? 'default' : 'checkable'"
+                    [nzChecked]="i == item.value.now"
+                    [class.can-click]="item.value.type == 'Selector'"
+                    (nzCheckedChange)="selectorChange($event, item, i)"
+                    [nzColor]="i == item.value.now ? 'blue' : nameToColor(i)"
+                  >
+                    {{ i }}
+                  </nz-tag>
+                </tag-select>
+              </se>
+            </ng-template>
+          </form>
+        </div>
+        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8">
+          <div class="rank">
+            <!-- <h4 class="ranking-title">{{ 'app.analysis.' + tab.key + '-ranking' | translate }}</h4>
+                    <ul class="rank-list">
+                      <li *ngFor="let i of rankingListData; let idx = index">
+                        <span class="number" [ngClass]="{ active: idx < 3 }">{{ idx + 1 }}</span>
+                        <span class="title">{{ i.title }}</span>
+                        <span class="value">{{ i.total | number: '3.0' }}</span>
+                      </li>
+                    </ul> -->
+          </div>
+        </div>
+      </div>
+    </nz-tab>
+    <nz-tab nzTitle="代理">
+      <div nz-row style="padding: 6px;">
+        <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+          <div class="row-masonry row-masonry-xl-8 row-masonry-lg-5 row-masonry-md-4 row-masonry-sm-3 row-masonry-xs-2">
+            <ng-template ngFor let-item [ngForOf]="adaptersProxy | keys" [ngForTrackBy]="proxiestrackByFn">
+              <div class="col-masonry">
+                <div (click)="delay(item.key)" class="box-placeholder can-click">
+                  <div nz-row>
+                    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" class="adapter-proxy-transition">
+                      <ng-template ngFor let-history [ngForOf]="item.value.history | slice: -1">
+                        <h2 class="text-md mb-sm" [ngClass]="'text-' + delayToColor(history.delay)">
+                          {{ item.key }}
+                        </h2>
+
+                        <div class="adapter-proxy-type">
+                          <nz-tag [nzColor]="delayToColor(history.delay)"> {{ item.value.type }}</nz-tag>
+                        </div>
+                        <div>
+                          <span class="text-xs text-grey">{{ history.time | date: 'mediumTime' }}</span>
+                          <span class="text-xs adapter-proxy-delay" [ngClass]="'text-' + delayToColor(history.delay)">
+                            {{ history.delay }}ms
+                          </span>
+                        </div>
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </nz-tab>
+    <nz-tab nzTitle="规则">
+      <div nz-row style="padding: 6px;">
+        <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+          <nz-list [nzDataSource]="rules" nzSize="small" [nzRenderItem]="rule" [nzItemLayout]="'horizontal'">
+            <ng-template #rule let-rule>
+              <nz-list-item>
+                <nz-tag [nzMode]="'default'"> {{ rule.type }} </nz-tag>
+                <nz-tag [nzMode]="'default'" [nzColor]="nameToColor(rule.proxy)"> {{ rule.proxy }} </nz-tag>
+                {{ rule.payload }}
+                {{ rule.payloads | json }}
+              </nz-list-item>
+            </ng-template>
+          </nz-list>
+        </div>
+      </div>
+    </nz-tab>
+    <nz-tab nzTitle="日志">
+      <div nz-row style="padding: 6px;">
+        <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+          <nz-list [nzDataSource]="logs" nzSize="small" [nzRenderItem]="log" [nzItemLayout]="'horizontal'">
+            <ng-template #log let-log>
+              <nz-list-item>
+                <nz-tag [nzMode]="'default'" [nzColor]="logsToColor(log.type)"> {{ log.type }}</nz-tag>
+                {{ log.payload }}
+              </nz-list-item>
+            </ng-template>
+          </nz-list>
+        </div>
+      </div>
+    </nz-tab>
+  </nz-tabset>
+  <ng-template #extraTemplate>
+    <div class="sales-extra-wrap">
+      <div class="sales-extra">
+        <!-- <a (click)="setDate('today')">{{ 'app.analysis.all-day' | translate }}</a>
+              <a (click)="setDate('week')">{{ 'app.analysis.all-week' | translate }}</a>
+              <a (click)="setDate('month')">{{ 'app.analysis.all-month' | translate }}</a>
+              <a (click)="setDate('year')">{{ 'app.analysis.all-year' | translate }}</a> -->
+        <!-- <a>测速</a> -->
+      </div>
+    </div>
+  </ng-template>
+</nz-card>

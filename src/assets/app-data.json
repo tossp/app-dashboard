@@ -1,0 +1,38 @@
+{
+  "app": {
+    "name": "砼砼的应用管理",
+    "description": "基于Ng-zorro的应用管理框架"
+  },
+  "user": {
+    "name": "砼砼",
+    "avatar": "./assets/tmp/img/avatar.jpg",
+    "email": "code@tossp.com"
+  },
+  "menu": [
+    {
+      "text": "主导航",
+      "i18n": "menu.main",
+      "group": true,
+      "hideInBreadcrumb": true,
+      "children": [
+        {
+          "text": "应用管理",
+          "icon": "anticon-dashboard",
+          "children": [
+            {
+              "text": "Clash管理",
+              "link": "/clash/index"
+            }
+          ]
+        },
+        {
+          "text": "快捷菜单",
+          "i18n": "menu.shortcut",
+          "icon": "anticon-rocket",
+          "shortcutRoot": true,
+          "children": []
+        }
+      ]
+    }
+  ]
+}
