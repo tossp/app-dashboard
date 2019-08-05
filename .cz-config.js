@@ -50,9 +50,9 @@ module.exports = {
     },
   ],
 
-  scopes: [{ name: 'clash' }],
+
   scopeOverrides: {
-    fix: [{ name: 'merge' }, { name: 'style' }, { name: 'e2eTest' }, { name: 'unitTest' }],
+    fix: [{ name: 'clash' }, { name: 'style' }, { name: 'e2eTest' }, { name: 'unitTest' }],
     build: [{ name: 'pack' }, { name: 'theme' }, { name: 'angular' }, { name: 'npm' }, { name: 'cli' }],
     ci: [{ name: 'travis' }, { name: 'drone' }, { name: 'gitlab-ci' }],
   },

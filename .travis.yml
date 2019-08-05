@@ -23,6 +23,7 @@ install:
 script:
   - npm run lint
   - npm run build:ci
+  - echo 'app-dashboard.gh.tossp.com' > dist/CNAME
 
 cache: npm
 
