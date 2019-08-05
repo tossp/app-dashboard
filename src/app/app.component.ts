@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { SwService } from '@core/ui/sw.service';
 import { TitleService, VERSION as VERSION_ALAIN } from '@delon/theme';
 import { NzModalService, VERSION as VERSION_ZORRO } from 'ng-zorro-antd';
 import { filter } from 'rxjs/operators';
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private titleSrv: TitleService,
     private modalSrv: NzModalService,
+    private sw: SwService,
   ) {
     renderer.setAttribute(el.nativeElement, 'ng-alain-version', VERSION_ALAIN.full);
     renderer.setAttribute(el.nativeElement, 'ng-zorro-version', VERSION_ZORRO.full);
