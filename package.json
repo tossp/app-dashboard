@@ -140,6 +140,11 @@
       "prettier --write",
       "git add"
     ],
+    "src/**/*.ts": [
+      "npm run lint:ts",
+      "prettier --write",
+      "git add"
+    ],
     "src/**/*.less": [
       "npm run lint:style",
       "prettier --write",
