@@ -34,7 +34,7 @@ export class SwService {
         updates.checkForUpdate();
       });
       updates.checkForUpdate();
-      this.subscribeToPush();
+      // this.subscribeToPush();
     } else {
       console.warn('Service Worker 被禁用或者浏览器不支持');
     }
@@ -48,7 +48,7 @@ export class SwService {
         serverPublicKey: this.VAPID_PUBLIC_KEY,
       })
       .then(sub => {
-        console.log(sub);
+        console.log('subscribeToPush', sub);
       })
       .catch(err => {
         console.error('Could not subscribe to notifications', err);
