@@ -4,7 +4,10 @@ module.exports = {
     'type-enum': [
       2,
       'always',
-      ['WIP', 'feat', 'fix', 'docs', 'style', 'refactor', 'perf', 'test', 'build', 'ci', 'chore', 'revert'],
+      ['build📦' ,'chore🔖', 'ci👷', 'docs📚', 'feat✨', 'fix🐞', 'perf⚡️', 'refactor♻️', 'revert⏪','style💅', 'test🏁',
+      'build' ,'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert','style', 'test',
+      ],
     ],
   },
+  parserPreset: './parser-preset'
 };

@@ -106,7 +106,6 @@
               "node_modules/qrious/dist/qrious.min.js"
             ],
             "styles": [],
-            "styles": [],
             "assets": ["src/assets", "src/manifest.webmanifest", "src/manifest.webmanifest"]
           }
         },
