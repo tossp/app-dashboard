@@ -23,7 +23,6 @@ install:
 script:
   - npm run lint
   - npm run build:ci
-  - echo 'app-dashboard.gh.tossp.com' > dist/CNAME
 
 cache: npm
 
@@ -32,6 +31,7 @@ deploy:
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
   keep_history: true
+  fqdn: app-dashboard.gh.tossp.com
   local_dir: dist
   on:
     branch: develop

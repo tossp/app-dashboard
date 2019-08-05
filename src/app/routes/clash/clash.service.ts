@@ -61,7 +61,7 @@ export class ClashService {
     port: 8080,
     secret: '',
     numLogs: 100,
-    numTraffic: 600,
+    numTraffic: 60,
   };
   private _configs$ = new BehaviorSubject<IConfig>(null);
   private _proxies$ = new BehaviorSubject<IProxy>(null);

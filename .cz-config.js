@@ -9,16 +9,16 @@ module.exports = {
       name: '特性:  添加新特性或者功能(feat)✨',
     },
     {
-      value: 'fix🐞',
-      name: '修复:  修补错误(fix)🐞',
+      value: 'fix🐛',
+      name: '修复:  修补错误(fix)🐛',
     },
     {
-      value: 'docs📚',
-      name: '文档:  只变更了文档说明(docs)📚',
+      value: 'docs📝',
+      name: '文档:  只变更了文档说明(docs)📝',
     },
     {
-      value: 'style💅',
-      name: '样式:  代码样式，不影响代码含义的更改(style)💅',
+      value: 'style🎨',
+      name: '样式:  代码样式，不影响代码含义的更改(style)🎨',
     },
     {
       value: 'refactor♻',
@@ -41,19 +41,19 @@ module.exports = {
       name: '集成:  对CI配置文件和脚本的更改(ci)👷',
     },
     {
-      value: 'chore🔖',
-      name: '其他:  不涉及源码、测试文件、说明文档或集成脚本的变更(chore)🔖',
+      value: 'chore🔧',
+      name: '其他:  不涉及源码、测试文件、说明文档或集成脚本的变更(chore)🔧',
     },
     {
       value: 'revert🔙',
       name: '滚回:  恢复以前的提交(revert)🔙',
     },
   ],
-
+  scope: [{ name: 'clash' }, { name: 'core' }],
   scopeOverrides: {
-    fix: [{ name: 'clash' },{ name: 'merge' }, { name: 'style' }, { name: 'e2eTest' }, { name: 'unitTest' }],
-    build: [{ name: 'pack' }, { name: 'theme' }, { name: 'angular' }, { name: 'npm' }, { name: 'cli' }],
-    ci: [{ name: 'travis' }, { name: 'drone' }, { name: 'gitlab-ci' }],
+    "fix🐛": [{ name: 'clash' },{ name: 'merge' }, { name: 'style' }, { name: 'e2eTest' }, { name: 'unitTest' }],
+    "build📦": [{ name: 'pack' }, { name: 'theme' }, { name: 'angular' }, { name: 'npm' }, { name: 'cli' }],
+    "ci👷": [{ name: 'travis' }, { name: 'drone' }, { name: 'gitlab-ci' }],
   },
   messages: {
     type: '请选择本次commit的类型:',
