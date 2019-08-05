@@ -115,8 +115,7 @@
               <div nz-col [nzSpan]="6">
                 <nz-form-item nzFlex>
                   <nz-input-group nzCompact [nzSize]="'small'">
-                    <button nz-button [nzSize]="'small'" (click)="editEc()" nzType="primary">远程配置</button>
-                    <button nz-button (click)="restart()" [nzSize]="'small'">刷新</button>
+                    <button nz-button [nzSize]="'small'" nzType="primary">修改配置</button>
                   </nz-input-group>
                 </nz-form-item>
               </div>
@@ -150,26 +149,16 @@
                     [nzChecked]="i == item.value.now"
                     [class.can-click]="item.value.type == 'Selector'"
                     (nzCheckedChange)="selectorChange($event, item, i)"
-                    [nzColor]="i == item.value.now ? 'blue' : nameToColor(i)"
+                    [nzColor]="nameToColor(i)"
                   >
-                    {{ i }}
+                    <nz-badge [nzStatus]="i == item.value.now ? 'processing' : null">
+                      {{ i }}
+                    </nz-badge>
                   </nz-tag>
                 </tag-select>
               </se>
             </ng-template>
           </form>
-        </div>
-        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8">
-          <div class="rank">
-            <!-- <h4 class="ranking-title">{{ 'app.analysis.' + tab.key + '-ranking' | translate }}</h4>
-                    <ul class="rank-list">
-                      <li *ngFor="let i of rankingListData; let idx = index">
-                        <span class="number" [ngClass]="{ active: idx < 3 }">{{ idx + 1 }}</span>
-                        <span class="title">{{ i.title }}</span>
-                        <span class="value">{{ i.total | number: '3.0' }}</span>
-                      </li>
-                    </ul> -->
-          </div>
         </div>
       </div>
     </nz-tab>
@@ -245,6 +234,8 @@
               <a (click)="setDate('month')">{{ 'app.analysis.all-month' | translate }}</a>
               <a (click)="setDate('year')">{{ 'app.analysis.all-year' | translate }}</a> -->
         <!-- <a>测速</a> -->
+        <button nz-button (click)="restart()" [nzSize]="'small'">刷新</button>
+        <button nz-button [nzSize]="'small'" (click)="editEc()" nzType="primary">连接配置</button>
       </div>
     </div>
   </ng-template>

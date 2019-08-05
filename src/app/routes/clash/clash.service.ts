@@ -141,7 +141,6 @@ export class ClashService {
     return this.http.get<IConfig>(`${this.url}/configs`, null, { headers: this.headers, observe: 'body' }).pipe(
       tap(
         data => {
-          console.log(data);
           this._configs$.next(data);
         },
         err => {
