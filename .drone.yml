@@ -1,5 +1,5 @@
 kind: pipeline
-name: ts-app
+name: app-dashboard
 
 steps:
   - name: 恢复缓存
@@ -15,16 +15,12 @@ steps:
     volumes:
       - name: cache
         path: /tmp/cache
-  - name: 安装依赖
+  - name: 构建构建
     image: node:lts-alpine
-    pull: true
     commands:
       - npm i -g npm
       - npm i -g @angular/cli
       - npm install
-  - name: 构建构建
-    image: node:lts-alpine
-    commands:
       - npm run build:ci
   - name: 重建缓存
     image: meltwater/drone-cache:dev
