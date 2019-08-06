@@ -20,6 +20,7 @@ steps:
     pull: true
     commands:
       - npm i -g npm
+      - npm i -g @angular/cli
       - npm install
   - name: 构建构建
     image: node:lts-alpine
