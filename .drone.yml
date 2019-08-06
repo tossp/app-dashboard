@@ -16,13 +16,13 @@ steps:
       - name: cache
         path: /tmp/cache
   - name: 安装依赖
-    image: lts-alpine
+    image: node:lts-alpine
     pull: true
     commands:
       - npm i -g npm
       - npm install
   - name: 构建构建
-    image: lts-alpine
+    image: node:lts-alpine
     commands:
       - npm run build:ci
   - name: 重建缓存
