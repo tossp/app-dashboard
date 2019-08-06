@@ -1,0 +1,59 @@
+kind: pipeline
+name: 项目编译
+
+steps:
+  - name: 恢复缓存
+    image: meltwater/drone-cache:dev
+    pull: true
+    settings:
+      backend: 'filesystem'
+      restore: true
+      cache_key: '{{ .Commit.Branch }}'
+      archive_format: 'gzip'
+      mount:
+        - 'node_modules'
+    volumes:
+      - name: cache
+        path: /tmp/cache
+  - name: 安装依赖
+    image: lts-alpine
+    pull: true
+    commands:
+      - npm i -g npm
+      - npm install
+  - name: 构建构建
+    image: lts-alpine
+    commands:
+      - npm run build:ci
+  - name: 重建缓存
+    image: meltwater/drone-cache:dev
+    settings:
+      backend: 'filesystem'
+      rebuild: true
+      cache_key: '{{ .Commit.Branch }}'
+      archive_format: 'gzip'
+      mount:
+        - 'node_modules'
+    volumes:
+      - name: cache
+        path: /tmp/cache
+  - name: 发布部署
+    image: plugins/s3-sync:1
+    pull: true
+    settings:
+      bucket: app
+      access_key:
+        from_secret: qn_ak
+      secret_key:
+        from_secret: qn_sk
+      region: cn-south-1
+      endpoint: s3-cn-south-1.qiniucs.com
+      source: dist
+    when:
+      branch:
+        - master
+        - develop
+volumes:
+  - name: cache
+    host:
+      path: /root/ts/compose/drone/cache
