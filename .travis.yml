@@ -19,13 +19,6 @@ script:
 cache: npm
 
 deploy:
-  - provider: pages
-    skip_cleanup: true
-    github_token: $GITHUB_TOKEN
-    fqdn: app.gh.tossp.com
-    local_dir: dist
-    on:
-      branch: develop
   - provider: s3
     access_key_id: $QN_AK
     secret_access_key: $QN_SK
@@ -34,3 +27,12 @@ deploy:
     region: cn-south-1
     local_dir: dist
     endpoint: https://s3-cn-south-1.qiniucs.com
+    on:
+      branch: develop
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    fqdn: app.gh.tossp.com
+    local_dir: dist
+    on:
+      branch: develop
