@@ -36,17 +36,18 @@ steps:
       - name: cache
         path: /tmp/cache
   - name: 发布部署
-    image: plugins/s3-sync:1
+    image: plugins/s3
     pull: true
     settings:
+      path_style: true
       bucket: app
       access_key:
         from_secret: qn_ak
       secret_key:
         from_secret: qn_sk
       region: cn-south-1
-      endpoint: s3-cn-south-1.qiniucs.com
-      source: dist
+      endpoint: https://s3-cn-south-1.qiniucs.com
+      source: dist/**/*
     when:
       branch:
         - master
