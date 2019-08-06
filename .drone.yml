@@ -1,5 +1,5 @@
 kind: pipeline
-name: 项目编译
+name: ts-app
 
 steps:
   - name: 恢复缓存
