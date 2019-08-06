@@ -3,14 +3,6 @@ language: node_js
 node_js:
   - '10'
 
-addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
-      - google-chrome-beta
-
 git:
   depth: 1
 
@@ -30,7 +22,6 @@ deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  keep_history: true
   fqdn: app-dashboard.gh.tossp.com
   local_dir: dist
   on:
