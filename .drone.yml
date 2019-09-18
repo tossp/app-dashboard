@@ -2,39 +2,15 @@ kind: pipeline
 name: app-dashboard
 
 steps:
-  - name: 恢复缓存
-    image: meltwater/drone-cache:dev
-    pull: true
-    settings:
-      backend: 'filesystem'
-      restore: true
-      cache_key: '{{ .Commit.Branch }}'
-      archive_format: 'gzip'
-      mount:
-        - 'node_modules'
-    volumes:
-      - name: cache
-        path: /tmp/cache
-  - name: 构建构建
+  - name: 测试构建
     image: node:lts-alpine
     pull: true
     commands:
       - npm i -g npm
       - npm i -g @angular/cli
       - npm install
+      - npm run lint
       - npm run build:ci
-  - name: 重建缓存
-    image: meltwater/drone-cache:dev
-    settings:
-      backend: 'filesystem'
-      rebuild: true
-      cache_key: '{{ .Commit.Branch }}'
-      archive_format: 'gzip'
-      mount:
-        - 'node_modules'
-    volumes:
-      - name: cache
-        path: /tmp/cache
   - name: 发布部署
     image: plugins/s3
     pull: true
@@ -52,7 +28,3 @@ steps:
       branch:
         - master
         - develop
-volumes:
-  - name: cache
-    host:
-      path: /root/ts/compose/drone/cache
