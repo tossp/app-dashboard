@@ -22,7 +22,7 @@ deploy:
   - provider: s3
     access_key_id: $QN_AK
     secret_access_key: $QN_SK
-    bucket: 'app'
+    bucket: '82vi6u'
     skip_cleanup: true
     region: cn-south-1
     local_dir: dist
