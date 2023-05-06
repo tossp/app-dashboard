@@ -63,7 +63,7 @@
     "@antv/data-set": "^0.10.2",
     "@antv/g2": "^3.5.3",
     "@antv/g2-plugin-slider": "^2.1.1",
-    "@biesbjerg/ngx-translate-extract": "^2.3.4",
+    "@biesbjerg/ngx-translate-extract": "^7.0.4",
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-angular": "^8.1.0",
     "@delon/abc": "^8.2.0",
