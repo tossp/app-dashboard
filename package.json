@@ -118,7 +118,7 @@
     "qrious": "^4.0.2",
     "rxjs": "~6.4.0",
     "screenfull": "^4.2.0",
-    "stylelint": "^10.1.0",
+    "stylelint": "^15.10.1",
     "stylelint-config-prettier": "^5.2.0",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^18.3.0",
